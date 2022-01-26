@@ -12,5 +12,17 @@ namespace Todo.Controllers
     {
       return context.Todos.ToList();
     }
+
+
+    [HttpPost("/")]
+    public TodoList Post(
+      [FromBody] TodoList todo,
+      [FromServices] AppDataContext context
+    )
+    {
+      context.Todos.Add(todo);
+      context.SaveChanges();
+      return todo;
+    }
   }
 }
